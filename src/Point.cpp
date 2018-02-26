@@ -29,11 +29,11 @@ bool Point::isNullPos() const
 
 bool operator<(const Point &l, const Point &r)
 {
-	if(l.YPos()<r.YPos())
+	if(l.XPos()<r.XPos())
 		return true;
-	if(l.YPos()==r.YPos())
+	if(l.XPos()==r.XPos())
 	{
-		if(l.XPos()<r.XPos())
+		if(l.YPos()<r.YPos())
 			return true;
 	}
 	return false;

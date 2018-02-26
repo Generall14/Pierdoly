@@ -74,25 +74,25 @@ int main()
 	
 	
 	Generator gen(new TestEquation(0.5), Point(1, 1));
-	PointSet psg = gen.generate(100, 300);
+	PointSet psg = gen.generate(200, 8000);
 	std::cout << "result size: " << psg.size() << std::endl;
 	
 	unsigned int v_min, v_max;
 	int x_min, x_max, y_min, y_max;
-	PointSet psn = psg.normalized();
-	std::cout << "PointSet oryginal: ";
-	for(auto it = psg.begin();it!=psg.end();it++)
-		std::cout << (*it).value << " ";
-	std::cout << std::endl;
-	std::cout << "PointSet normalized: ";
-	for(auto it = psn.begin();it!=psn.end();it++)
-		std::cout << (*it).value << " ";
-	std::cout << std::endl;
+// 	PointSet psn = psg.normalized();
+// 	std::cout << "PointSet oryginal: ";
+// 	for(auto it = psg.begin();it!=psg.end();it++)
+// 		std::cout << (*it).value << " ";
+// 	std::cout << std::endl;
+// 	std::cout << "PointSet normalized: ";
+// 	for(auto it = psn.begin();it!=psn.end();it++)
+// 		std::cout << (*it).value << " ";
+// 	std::cout << std::endl;
 // 	std::cout << "PointSet y normalized: ";
 // 	for(auto it = psn.begin();it!=psn.end();it++)
 // 		std::cout << (*it).YPos() << " ";
 // 	std::cout << std::endl;
-	psn.getRanges(x_min, x_max, y_min, y_max, v_min, v_max);
+	psg.getRanges(x_min, x_max, y_min, y_max, v_min, v_max);
 	std::cout << x_min << " " << x_max << " " << y_min << " " << y_max << " " << v_min << " " << v_max << std::endl;
 	
 	psg.toBitmap("test.bmp");

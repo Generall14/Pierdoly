@@ -104,7 +104,6 @@ PointSet PointSet::normalized(PointSet::uint maxValue) const
 		v_min = 0;
 	}
 	
-	std::cout << "min: " << v_min << ", max: " << v_max << ", K: " << k << std::endl;
  	for(auto it=_set.begin();it!=_set.end();++it)
 	{
 		Point tpoint((*it).XPos()-x_min, (*it).YPos()-y_min, (float)((*it).value-v_min)*k);
@@ -126,18 +125,18 @@ bool PointSet::toBitmap(std::string fileAdr) const
 	
 	for(auto it=_set.begin();it!=_set.end();++it)
 		(*it).value = sqrt(10*(*it).value);
-	for(auto it=_set.begin();it!=_set.end();++it)
-		(*it).value = sqrt(10*(*it).value);
+// 	for(auto it=_set.begin();it!=_set.end();++it)
+// 		(*it).value = sqrt(10*(*it).value);
 	
-	PointSet norm = normalized();
+	PointSet norm = normalized(0xFF);
 	const uint buflength = 64;
 	unsigned int v_min, v_max;
 	int x_min, x_max, y_min, y_max;
 	norm.getRanges(x_min, x_max, y_min, y_max, v_min, v_max);
-	unsigned int szerokosc = x_max+1;
+	unsigned int szerokosc = y_max+1;
 	while(szerokosc%4)
 		szerokosc++;
-	unsigned int wysokosc = y_max+1, rozmiar=szerokosc*wysokosc;
+	unsigned int wysokosc = x_max+1, rozmiar=szerokosc*wysokosc;
 	unsigned int rozmiarPliku = rozmiar+buflength;
 	rozmiarPliku *= 3;
 	rozmiar *= 3;
@@ -173,14 +172,16 @@ bool PointSet::toBitmap(std::string fileAdr) const
 	
 	for(auto it=norm.begin();it!=norm.end();++it)
 	{
-		vec[(*it).XPos()*wysokosc+(*it).YPos()] = (*it).value;
+		vec[(*it).XPos()*szerokosc+(*it).YPos()] = (*it).value;
 	}
 
 	file.write(header, buflength);
-	char tt[2];
+	char tt[3];
 	for(int i=0;i<vec.size();i++)
 	{
-		tt[0] = vec.at(i);
+		tt[0] = vec.at(i)&0xFF;
+		tt[1] = (vec.at(i)>>4)&0xFF;
+		tt[2] = (vec.at(i)>>8)&0xFF;
 		file.write(tt, 1);
 		file.write(tt, 1);
 		file.write(tt, 1);
