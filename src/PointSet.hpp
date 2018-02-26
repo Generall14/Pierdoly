@@ -15,11 +15,13 @@
 class PointSet
 {
 public:
+	typedef unsigned int uint;
 	PointSet();
 	
 	std::set<Point>::iterator begin();
 	std::set<Point>::iterator end();
-	unsigned int size() const;
+	uint size() const;
+	void getRanges(uint &x_min, uint &x_max, uint &y_min, uint &y_max) const;
 	
 	void addPoint(const Point added);
 

@@ -9,12 +9,12 @@ Point::Point(unsigned int x_pos, unsigned int y_pos, unsigned int initial_value)
 
 unsigned int Point::XPos() const
 {
-	return _y;
+	return _x;
 }
 
 unsigned int Point::YPos() const
 {
-	return _x;
+	return _y;
 }
 
 /**

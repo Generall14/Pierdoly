@@ -24,7 +24,7 @@ int main()
 		std::cout << (*it).value << " ";
 	std::cout << std::endl;
 	
-	Point c(2, 2);
+	Point c(6, 2);
 	res = mySet.insert(c);
 	if(!res.second)
 		(*res.first).value++;
@@ -44,7 +44,9 @@ int main()
 	for(auto it = ps.begin();it!=ps.end();it++)
 		std::cout << (*it).value << " ";
 	std::cout << std::endl;
-	
+	unsigned int x_min, x_max, y_min, y_max;
+	ps.getRanges(x_min, x_max, y_min, y_max);
+	std::cout << x_min << " " << x_max << " " << y_min << " " << y_max << std::endl;
 	std::cout << "empty program" << std::endl;
 	return 0;
 }
