@@ -10,15 +10,15 @@
 class Point
 {
 public:
-	Point(unsigned int x_pos, unsigned int y_pos, unsigned int initial_value=1);
+	Point(int x_pos, int y_pos, unsigned int initial_value=1);
 	mutable unsigned int value;
 	
-	unsigned int XPos() const;
-	unsigned int YPos() const;
+	int XPos() const;
+	int YPos() const;
 	bool isNullPos() const;
 	
 private:
-	unsigned int _x, _y;
+	int _x, _y;
 };
 
 bool operator<(const Point &l, const Point &r);

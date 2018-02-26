@@ -1,18 +1,18 @@
 #include "Point.hpp"
 
-Point::Point(unsigned int x_pos, unsigned int y_pos, unsigned int initial_value):
+Point::Point(int x_pos, int y_pos, unsigned int initial_value):
 	value(initial_value),
 	_x(x_pos),
 	_y(y_pos)
 {
 }
 
-unsigned int Point::XPos() const
+int Point::XPos() const
 {
 	return _x;
 }
 
-unsigned int Point::YPos() const
+int Point::YPos() const
 {
 	return _y;
 }
