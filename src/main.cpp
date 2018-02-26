@@ -3,6 +3,8 @@
 #include "Point.hpp"
 #include "PointSet.hpp"
 #include "TestEquation.hpp"
+#include "Equations.hpp"
+#include "Generator.hpp"
 
 int main()
 {
@@ -68,16 +70,32 @@ int main()
 // 	
 // 	ps.toBitmap("test.bmp");
 	
+
 	
 	
+	Generator gen(new TestEquation(0.5), Point(1, 1));
+	PointSet psg = gen.generate(100, 300);
+	std::cout << "result size: " << psg.size() << std::endl;
 	
-	Point a(100, 100);
-	TestEquation te(0.5);
-	for(int i=0;i<10;++i)
-	{
-		Point x = te.step(a);
-		std::cout << "x: " << x.XPos() << " y: " << x.YPos() << std::endl;
-	}
+	unsigned int v_min, v_max;
+	int x_min, x_max, y_min, y_max;
+	PointSet psn = psg.normalized();
+	std::cout << "PointSet oryginal: ";
+	for(auto it = psg.begin();it!=psg.end();it++)
+		std::cout << (*it).value << " ";
+	std::cout << std::endl;
+	std::cout << "PointSet normalized: ";
+	for(auto it = psn.begin();it!=psn.end();it++)
+		std::cout << (*it).value << " ";
+	std::cout << std::endl;
+// 	std::cout << "PointSet y normalized: ";
+// 	for(auto it = psn.begin();it!=psn.end();it++)
+// 		std::cout << (*it).YPos() << " ";
+// 	std::cout << std::endl;
+	psn.getRanges(x_min, x_max, y_min, y_max, v_min, v_max);
+	std::cout << x_min << " " << x_max << " " << y_min << " " << y_max << " " << v_min << " " << v_max << std::endl;
+	
+	psg.toBitmap("test.bmp");
 	
 	
 	

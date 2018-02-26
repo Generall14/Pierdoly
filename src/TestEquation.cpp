@@ -14,10 +14,10 @@ TestEquation::TestEquation(float first)
 Point TestEquation::step(Point &other)
 {
 	int x, y;
-	x = other.XPos()*0.75;
+	x = other.XPos()*1;
 	if((rand()%1000)<_first)
-		y = other.YPos()*0.75;
+		y = other.YPos()*1;
 	else 
-		y = other.YPos()*-0.75;
+		y = other.YPos()*-1;
 	return Point(x, y);
 }

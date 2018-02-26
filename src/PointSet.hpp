@@ -24,7 +24,7 @@ public:
 	std::set<Point>::iterator begin();
 	std::set<Point>::iterator end();
 	uint size() const;
-	void getRanges(uint &x_min, uint &x_max, uint &y_min, uint &y_max, uint &v_min, uint &v_max) const;
+	void getRanges(int &x_min, int &x_max, int &y_min, int &y_max, uint &v_min, uint &v_max) const;
 	
 	void addPoint(const Point added);
 

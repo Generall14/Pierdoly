@@ -2,6 +2,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 PointSet::PointSet()
 {
@@ -23,7 +24,7 @@ PointSet::uint PointSet::size() const
 	return _set.size();
 }
 
-void PointSet::getRanges(PointSet::uint &x_min, PointSet::uint &x_max, PointSet::uint &y_min, PointSet::uint &y_max, PointSet::uint &v_min, PointSet::uint &v_max) const
+void PointSet::getRanges(int &x_min, int &x_max, int &y_min, int &y_max, PointSet::uint &v_min, PointSet::uint &v_max) const
 {
 	x_min = 0;
 	x_max = 0;
@@ -90,13 +91,20 @@ PointSet PointSet::normalized(PointSet::uint maxValue) const
 	PointSet temp;
 	if(_set.empty())
 		return temp;
-	uint x_min, x_max, y_min, y_max, v_min, v_max;
+	uint v_min, v_max;
+	int x_min, x_max, y_min, y_max;
 	getRanges(x_min, x_max, y_min, y_max, v_min, v_max);
 	float k;
+	
 	if((v_max-v_min)!=0)
 		k = (float)maxValue/((float)v_max-(float)v_min);
 	else
-		k = 1;
+	{
+		k = (float)maxValue/(float)v_max;
+		v_min = 0;
+	}
+	
+	std::cout << "min: " << v_min << ", max: " << v_max << ", K: " << k << std::endl;
  	for(auto it=_set.begin();it!=_set.end();++it)
 	{
 		Point tpoint((*it).XPos()-x_min, (*it).YPos()-y_min, (float)((*it).value-v_min)*k);
@@ -116,9 +124,15 @@ bool PointSet::toBitmap(std::string fileAdr) const
 	if(!file.is_open())
 		throw "ERROR!";
 	
+	for(auto it=_set.begin();it!=_set.end();++it)
+		(*it).value = sqrt(10*(*it).value);
+	for(auto it=_set.begin();it!=_set.end();++it)
+		(*it).value = sqrt(10*(*it).value);
+	
 	PointSet norm = normalized();
 	const uint buflength = 64;
-	unsigned int x_min, x_max, y_min, y_max, v_min, v_max;
+	unsigned int v_min, v_max;
+	int x_min, x_max, y_min, y_max;
 	norm.getRanges(x_min, x_max, y_min, y_max, v_min, v_max);
 	unsigned int szerokosc = x_max+1;
 	while(szerokosc%4)
@@ -159,8 +173,7 @@ bool PointSet::toBitmap(std::string fileAdr) const
 	
 	for(auto it=norm.begin();it!=norm.end();++it)
 	{
-		vec[(*it).YPos()*wysokosc+(*it).XPos()] = (*it).value;
-		std::cout << (*it).YPos()*wysokosc+(*it).XPos() << std::endl;
+		vec[(*it).XPos()*wysokosc+(*it).YPos()] = (*it).value;
 	}
 
 	file.write(header, buflength);
