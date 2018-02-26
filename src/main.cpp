@@ -35,6 +35,9 @@ int main()
 	
 	Point d(5, 3);
 	d.value=3;
+	Point e(55, 33);
+	e.value=7;
+	
 	
 	
 	
@@ -43,6 +46,7 @@ int main()
 	ps.addPoint(b);
 	ps.addPoint(a);
 	ps.addPoint(d);
+	ps.addPoint(e);
 	ps.merge(ps);
 	std::cout << "PointSet: ";
 	for(auto it = ps.begin();it!=ps.end();it++)
@@ -59,6 +63,9 @@ int main()
 	std::cout << std::endl;
 	psn.getRanges(x_min, x_max, y_min, y_max, v_min, v_max);
 	std::cout << x_min << " " << x_max << " " << y_min << " " << y_max << " " << v_min << " " << v_max << std::endl;
+	
+	
+	ps.toBitmap("test.bmp");
 	
 	std::cout << "empty program" << std::endl;
 	return 0;
