@@ -21,12 +21,12 @@ public:
 	std::set<Point>::iterator begin();
 	std::set<Point>::iterator end();
 	uint size() const;
-	void getRanges(uint &x_min, uint &x_max, uint &y_min, uint &y_max) const;
+	void getRanges(uint &x_min, uint &x_max, uint &y_min, uint &y_max, uint &v_min, uint &v_max) const;
 	
 	void addPoint(const Point added);
 
 	void merge(PointSet &other);
-	//PointSet normaized(unsigned int maxValue=0xFF) const;
+	PointSet normalized(uint maxValue=0xFF) const;
 	
 private:
 	std::set<Point> _set;
