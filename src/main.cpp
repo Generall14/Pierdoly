@@ -1,6 +1,7 @@
 #include <iostream>
 #include <set>
 #include "Point.hpp"
+#include "PointSet.hpp"
 
 int main()
 {
@@ -31,6 +32,19 @@ int main()
 	for(auto it = mySet.begin();it!=mySet.end();it++)
 		std::cout << (*it).value << " ";
 	std::cout << std::endl;
+	
+	
+	
+	PointSet ps;
+	ps.addPoint(c);
+	ps.addPoint(b);
+	ps.addPoint(a);
+	ps.merge(ps);
+	std::cout << "PointSet: ";
+	for(auto it = ps.begin();it!=ps.end();it++)
+		std::cout << (*it).value << " ";
+	std::cout << std::endl;
+	
 	std::cout << "empty program" << std::endl;
 	return 0;
 }
