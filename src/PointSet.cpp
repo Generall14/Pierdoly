@@ -201,6 +201,11 @@ void PointSet::toBitmapc(std::string fileAdr) const
 	toBitmap(fileAdr, g, b, r);
 }
 
+void PointSet::toBitmap(std::string fileAdr, fun all) const
+{
+	toBitmap(fileAdr, all, all, all);
+}
+
 /**
  * Funkcja zapisuje znormalizowany zbiór punktów jako bitmape w pliku wskazanym w
  * argumencie. Funkcje r, g, b przetwarzają dane z zakresu 0x00 - 0xFF na bajty 

@@ -34,6 +34,7 @@ public:
 
 	typedef std::function< char(char)> fun;
 	void toBitmap(std::string fileAdr, fun r, fun g, fun b) const;
+	void toBitmap(std::string fileAdr, fun all) const;
 	void toBitmap(std::string fileAdr) const;
 	void toBitmapc(std::string fileAdr) const;
 	void about() const;
