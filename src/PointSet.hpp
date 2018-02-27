@@ -32,6 +32,7 @@ public:
 	void sqrt();
 
 	void toBitmap(std::string fileAdr) const;
+	void about() const;
 	
 private:
 	void merge(PointSet &other);

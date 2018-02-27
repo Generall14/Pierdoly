@@ -25,6 +25,18 @@ PointSet::uint PointSet::size() const
 	return _set.size();
 }
 
+void PointSet::about() const
+{
+// 	std::cout << "result size: " << psg.size() << std::endl;
+	unsigned int v_min, v_max;
+	int x_min, x_max, y_min, y_max;
+	getRanges(x_min, x_max, y_min, y_max, v_min, v_max);
+	std::cout << "Elementów: " << size() << ", szerokosc: " << y_max-y_min << ", wysokosc: " << x_max-x_min << std::endl;
+	std::cout << "Zakresy: x[ " << x_min << " ; " << x_max << " ], y[ " << y_min << " ; " << y_max << " ], v[ " << v_min << " ; " << v_max << " ]" << std::endl;
+	
+// 	std::cout << x_min << " " << x_max << " " << y_min << " " << y_max << " " << v_min << " " << v_max << std::endl;
+}
+
 void PointSet::getRanges(int &x_min, int &x_max, int &y_min, int &y_max, PointSet::uint &v_min, PointSet::uint &v_max) const
 {
 	x_min = 0;
