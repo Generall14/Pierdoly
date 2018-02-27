@@ -3,6 +3,7 @@
 
 #include <set>
 #include <string>
+#include <functional>
 #include "Point.hpp"
 
 /**
@@ -31,7 +32,10 @@ public:
 	void multiply(float mul);
 	void sqrt();
 
+	typedef std::function< char(char)> fun;
+	void toBitmap(std::string fileAdr, fun r, fun g, fun b) const;
 	void toBitmap(std::string fileAdr) const;
+	void toBitmapc(std::string fileAdr) const;
 	void about() const;
 	
 private:

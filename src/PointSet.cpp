@@ -166,12 +166,55 @@ void PointSet::sqrt()
  */
 void PointSet::toBitmap(std::string fileAdr) const
 {
+	std::function<char(char)>lambda = [=](char arg)->char{return arg&0xFF;};
+	toBitmap(fileAdr, lambda, lambda, lambda);
+}
+
+void PointSet::toBitmapc(std::string fileAdr) const
+{
+	std::function<char(char)>r = [=](char arg)->char
+	{
+		unsigned int x = (unsigned int)arg;
+		if(x<128)
+			return x;
+		else
+			return (x-128)*2;
+	};
+	std::function<char(char)>g = [=](char arg)->char
+	{
+		unsigned int x = (unsigned int)arg;
+		if(x<64)
+			return 0;
+		else if(x>192)
+			return 0xFF;
+		else
+			return (x-65)*2;
+	};
+	std::function<char(char)>b = [=](char arg)->char
+	{
+		unsigned int x = (unsigned int)arg;
+		if(x>128)
+			return 0xFF;
+		else
+			return (x)*2;
+	};
+	toBitmap(fileAdr, g, b, r);
+}
+
+/**
+ * Funkcja zapisuje znormalizowany zbiór punktów jako bitmape w pliku wskazanym w
+ * argumencie. Funkcje r, g, b przetwarzają dane z zakresu 0x00 - 0xFF na bajty 
+ * poszczególnych kolorów.
+ */
+void PointSet::toBitmap(std::string fileAdr, fun r, fun g, fun b) const
+{
 	std::ofstream file;
 	file.open(fileAdr, std::ios::out | std::ios::trunc | std::ios::binary);
 	if(!file.is_open())
 		throw "ERROR!";
 	
 	PointSet norm = normalized(0xFF);
+	norm.about();
 	
 	auto t1 = std::chrono::high_resolution_clock::now();
 	
@@ -224,9 +267,12 @@ void PointSet::toBitmap(std::string fileAdr) const
 	char tt[3];
 	for(int i=0;i<vec.size();i++)
 	{
-		tt[0] = vec.at(i)&0xFF;
-		tt[1] = vec.at(i)&0xFF;
-		tt[2] = vec.at(i)&0xFF;
+		tt[0] = b(vec.at(i));
+		tt[1] = g(vec.at(i));
+		tt[2] = r(vec.at(i));
+// 		tt[0] = vec.at(i)&0xFF;
+// 		tt[1] = vec.at(i)&0xFF;
+// 		tt[2] = vec.at(i)&0xFF;
 		file.write(tt, 3);
 	}
 	

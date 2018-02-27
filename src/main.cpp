@@ -7,21 +7,28 @@
 #include "Generator.hpp"
 #include <chrono>
 
+char r(char a)
+{
+	return 0xFF-a;
+}
+
 int main()
 {
-	Generator gen(new TestEquation(0.5), Point(10, 128)); // x, y
-	PointSet psg = gen.generate(10, 1000, 1); // zasieg, powtorzenia
+	Generator gen(new TestEquation(0.5), Point(10, 1024)); // x, y
+	PointSet psg = gen.generate(20, 10000, 2); // zasieg, powtorzenia
 	
 	
 	psg.about();
 	
+// 	psg.multiply(100000.0);psg.sqrt();psg.sqrt();
+	psg.multiply(1000.0);psg.sqrt();
+// 	psg.logarithm();
 	
-// 	psg.multiply(10.0);
-	psg.logarithm();
-// 	psg.sqrt();
 	
 	
-	psg.toBitmap("test.bmp");
+// 	psg.toBitmap("test.bmp", r, r, r);
+// 	psg.toBitmap("test.bmp");
+	psg.toBitmapc("test.bmp");
 	
 	return 0;
 }
