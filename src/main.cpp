@@ -9,9 +9,9 @@
 
 int main()
 {
-	Generator gen(new TestEquation(0.5), Point(1, 1));
+	Generator gen(new TestEquation(0.5), Point(10, 128));
 	auto t1 = std::chrono::high_resolution_clock::now();
-	PointSet psg = gen.generate(1000, 2000);
+	PointSet psg = gen.generate(20, 1000);
 	auto t2 = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double, std::milli> ms = t2 - t1;
 	std::cout << "Wygenerowano PointSet w " << ms.count() << " ms" << std::endl;

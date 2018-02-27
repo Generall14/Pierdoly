@@ -26,10 +26,7 @@ PointSet Generator::generate(unsigned int range, unsigned int repeates)
 			stand = Point(stand.XPos()+jump.XPos(), stand.YPos()+jump.YPos());
 			ps.addPoint(stand);
 			if(temp.isNullPos())
-			{
-				std::cout << "NULL POSS" << std::endl;
 				break;
-			}
 			else
 				jump = Point(temp.XPos(), temp.YPos());
 		}
