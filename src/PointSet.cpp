@@ -124,7 +124,7 @@ bool PointSet::toBitmap(std::string fileAdr) const
 		throw "ERROR!";
 	
 	for(auto it=_set.begin();it!=_set.end();++it)
-		(*it).value = sqrt(10*(*it).value);
+		(*it).value = log((*it).value);
 // 	for(auto it=_set.begin();it!=_set.end();++it)
 // 		(*it).value = sqrt(10*(*it).value);
 	
