@@ -39,8 +39,9 @@ public:
 	void toBitmapc(std::string fileAdr) const;
 	void about() const;
 	
-private:
 	void merge(PointSet &other);
+	
+private:
 	PointSet normalized(uint maxValue=0xFF) const;
 	
 	std::set<Point> _set;

@@ -17,7 +17,8 @@ private:
 	Equations* eq = nullptr;
 	Point first;
 	
-	void drawLine(PointSet &ps, Point start, Point line, unsigned int lines_resolution);
+	void drawLine(PointSet *ps, Point start, Point line, unsigned int lines_resolution);
+	void privateGenerate(PointSet *ps, unsigned int range, unsigned int repeates, unsigned int lines_resolution);
 };
 
 #endif

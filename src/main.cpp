@@ -6,6 +6,7 @@
 #include "Equations.hpp"
 #include "Generator.hpp"
 #include <chrono>
+#include <thread>
 
 char r(char a)
 {
@@ -15,7 +16,7 @@ char r(char a)
 int main()
 {
 	Generator gen(new TestEquation(0.5), Point(10, 1024)); // x, y
-	PointSet psg = gen.generate(20, 10000, 2); // zasieg, powtorzenia
+	PointSet psg = gen.generate(20, 40000, 2); // zasieg, powtorzenia
 	
 	
 	psg.about();
@@ -23,7 +24,6 @@ int main()
 // 	psg.multiply(100000.0);psg.sqrt();psg.sqrt();
 	psg.multiply(1000.0);psg.sqrt();
 // 	psg.logarithm();
-	
 	
 	
 // 	psg.toBitmap("test.bmp", r, r, r);
