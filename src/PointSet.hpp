@@ -27,13 +27,16 @@ public:
 	void getRanges(int &x_min, int &x_max, int &y_min, int &y_max, uint &v_min, uint &v_max) const;
 	
 	void addPoint(const Point added);
+	void logarithm();
+	void multiply(float mul);
+	void sqrt();
 
+	void toBitmap(std::string fileAdr) const;
+	
+private:
 	void merge(PointSet &other);
 	PointSet normalized(uint maxValue=0xFF) const;
 	
-	bool toBitmap(std::string fileAdr) const;
-	
-private:
 	std::set<Point> _set;
 };
 

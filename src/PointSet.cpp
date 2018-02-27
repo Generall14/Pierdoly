@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <chrono>
 
 PointSet::PointSet()
 {
@@ -88,6 +89,7 @@ void PointSet::merge(PointSet &other)
  */
 PointSet PointSet::normalized(PointSet::uint maxValue) const
 {
+	auto t1 = std::chrono::high_resolution_clock::now();
 	PointSet temp;
 	if(_set.empty())
 		return temp;
@@ -109,37 +111,70 @@ PointSet PointSet::normalized(PointSet::uint maxValue) const
 		Point tpoint((*it).XPos()-x_min, (*it).YPos()-y_min, (float)((*it).value-v_min)*k);
 		temp.addPoint(tpoint);
 	}
+	
+	auto t2 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double, std::milli> ms = t2 - t1;
+	std::cout << "Normalized in " << ms.count() << " ms" << std::endl;
 	return temp;
+}
+
+void PointSet::logarithm()
+{
+	auto t1 = std::chrono::high_resolution_clock::now();
+	for(auto it=_set.begin();it!=_set.end();++it)
+		(*it).value = log((*it).value);
+	auto t2 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double, std::milli> ms = t2 - t1;
+	std::cout << "Logarithmed in " << ms.count() << " ms" << std::endl;
+}
+
+void PointSet::multiply(float mul)
+{
+	auto t1 = std::chrono::high_resolution_clock::now();
+	for(auto it=_set.begin();it!=_set.end();++it)
+		(*it).value = mul*(*it).value;
+	auto t2 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double, std::milli> ms = t2 - t1;
+	std::cout << "Multiplied in " << ms.count() << " ms" << std::endl;
+}
+
+void PointSet::sqrt()
+{
+	auto t1 = std::chrono::high_resolution_clock::now();
+	for(auto it=_set.begin();it!=_set.end();++it)
+		(*it).value = std::sqrt((*it).value);
+	auto t2 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double, std::milli> ms = t2 - t1;
+	std::cout << "Sqrted in " << ms.count() << " ms" << std::endl;
 }
 
 /**
  * Funkcja zapisuje znormalizowany zbiór punktów jako monochromatyczną bitmape w pliku wskazanym w
  * argumencie.
  */
-bool PointSet::toBitmap(std::string fileAdr) const
+void PointSet::toBitmap(std::string fileAdr) const
 {
 	std::ofstream file;
 	file.open(fileAdr, std::ios::out | std::ios::trunc | std::ios::binary);
 	if(!file.is_open())
 		throw "ERROR!";
 	
-	for(auto it=_set.begin();it!=_set.end();++it)
-		(*it).value = log((*it).value);
-// 	for(auto it=_set.begin();it!=_set.end();++it)
-// 		(*it).value = sqrt(10*(*it).value);
-	
 	PointSet norm = normalized(0xFF);
-	const uint buflength = 64;
+	
+	auto t1 = std::chrono::high_resolution_clock::now();
+	
+	const uint buflength = 64; // zbieraniena obliczania rozmiarow itp.
 	unsigned int v_min, v_max;
 	int x_min, x_max, y_min, y_max;
 	norm.getRanges(x_min, x_max, y_min, y_max, v_min, v_max);
 	unsigned int szerokosc = y_max+1;
 	while(szerokosc%4)
-		szerokosc++;
+		szerokosc++; // wymagane wyrównanie wierszy do 4 bajtów?
 	unsigned int wysokosc = x_max+1, rozmiar=szerokosc*wysokosc;
 	unsigned int rozmiarPliku = rozmiar+buflength;
 	rozmiarPliku *= 3;
 	rozmiar *= 3;
+	
 	char header[buflength];
 	for(int i=0;i<buflength;++i)
 		header[i] = 0x00;
@@ -166,28 +201,28 @@ bool PointSet::toBitmap(std::string fileAdr) const
 	header[36] = (rozmiar>>16)&0xFF;
 	header[37] = (rozmiar>>24)&0xFF;
 	
-	std::vector<char> vec(rozmiar);
+	std::vector<char> vec(rozmiar); // bufor danych do zapisu
 	for(int i=0;i<vec.size();i++)
 		vec[i] = 0x00;
 	
 	for(auto it=norm.begin();it!=norm.end();++it)
-	{
-		vec[(*it).XPos()*szerokosc+(*it).YPos()] = (*it).value;
-	}
+		vec[(*it).XPos()*szerokosc+(*it).YPos()] = (*it).value; // dodawanie do bufora danych obliczonego zestawu punktow
 
-	file.write(header, buflength);
+	file.write(header, buflength); // zapis bufora naglowka
 	char tt[3];
 	for(int i=0;i<vec.size();i++)
 	{
 		tt[0] = vec.at(i)&0xFF;
-		tt[1] = (vec.at(i)>>4)&0xFF;
-		tt[2] = (vec.at(i)>>8)&0xFF;
-		file.write(tt, 1);
-		file.write(tt, 1);
-		file.write(tt, 1);
+		tt[1] = vec.at(i)&0xFF;
+		tt[2] = vec.at(i)&0xFF;
+		file.write(tt, 3);
 	}
 	
 	file.close();
+	
+	auto t2 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double, std::milli> ms = t2 - t1;
+	std::cout << "Saved as bitmap in " << ms.count() << " ms" << std::endl;
 }
 
 

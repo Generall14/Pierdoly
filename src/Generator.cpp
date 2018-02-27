@@ -1,5 +1,6 @@
 #include "Generator.hpp"
 #include <iostream>
+#include <chrono>
 
 Generator::Generator(Equations* equation, Point firstStep):
 	eq(equation),
@@ -14,6 +15,7 @@ Generator::~Generator()
 	
 PointSet Generator::generate(unsigned int range, unsigned int repeates)
 {
+	auto t1 = std::chrono::high_resolution_clock::now();
 	PointSet ps;
 	
 	for(int i=0;i<repeates;i++)
@@ -32,5 +34,8 @@ PointSet Generator::generate(unsigned int range, unsigned int repeates)
 		}
 	}
 	
+	auto t2 = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double, std::milli> ms = t2 - t1;
+	std::cout << "Generated in " << ms.count() << " ms" << std::endl;
 	return ps;
 }
