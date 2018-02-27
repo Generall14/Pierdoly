@@ -10,7 +10,7 @@
 int main()
 {
 	Generator gen(new TestEquation(0.5), Point(10, 128)); // x, y
-	PointSet psg = gen.generate(20, 1000); // zasieg, powtorzenia
+	PointSet psg = gen.generate(10, 1000, 1); // zasieg, powtorzenia
 	
 	
 	psg.about();
