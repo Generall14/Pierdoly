@@ -6,6 +6,7 @@
 #include "Generator.hpp"
 #include <chrono>
 #include <thread>
+#include <map>
 
 char r(char a)
 {
@@ -15,23 +16,23 @@ char r(char a)
 int main()
 {
 	float x0=1.0, y0=1.0;
-	unsigned int res = 100;
-	unsigned int steps = 1000000;
-	std::vector<Generator> gens;
+	unsigned int res = 80;
+	unsigned int steps = 20000000;
+	std::multimap<float, Generator> gens;
 	
-	gens.push_back( Generator(Equations::Barnsley(), x0, y0) );
-	gens.push_back( Generator(Equations::Sierpinski(), x0, y0) );
-// 	gens.push_back( Generator(Equations::Spiral(), x0, y0) );
-	gens.push_back( Generator(Equations::Maple(), x0, y0) );
-	gens.push_back( Generator(Equations::Tree(), x0, y0) );
-	gens.push_back( Generator(Equations::Tree2(), x0, y0) );
-	gens.push_back( Generator(Equations::Ice(), x0, y0) );
-	gens.push_back( Generator(Equations::Feather(), x0, y0) );
-	gens.push_back( Generator(Equations::Koch(), x0, y0) );
+	gens.insert(std::pair<float, Generator>(1.0, Generator(Equations::Barnsley(), x0, y0)));
+	gens.insert(std::pair<float, Generator>(3.0, Generator(Equations::Sierpinski(), x0, y0)));
+	gens.insert(std::pair<float, Generator>(0.5, Generator(Equations::Spiral(), x0, y0)));
+	gens.insert(std::pair<float, Generator>(1.5, Generator(Equations::Maple(), x0, y0)));
+	gens.insert(std::pair<float, Generator>(5.0, Generator(Equations::Tree(), x0, y0)));
+	gens.insert(std::pair<float, Generator>(10.0, Generator(Equations::Tree2(), x0, y0)));
+	gens.insert(std::pair<float, Generator>(10.0, Generator(Equations::Ice(), x0, y0)));
+	gens.insert(std::pair<float, Generator>(10.0, Generator(Equations::Feather(), x0, y0)));
+	gens.insert(std::pair<float, Generator>(10.0, Generator(Equations::Koch(), x0, y0)));
 	
 	for(auto g: gens)
 	{
-		PointSet psg = g.generate(steps, res);
+		PointSet psg = g.second.generate(steps, res*g.first);
 		
 		psg.about();
 		
@@ -39,10 +40,10 @@ int main()
 // 		psg.multiply(1000.0);psg.sqrt();
 // 		psg.logarithm();
 		
-// 		psg.toBitmap("test.bmp", r, r, r);
-// 		psg.toBitmap("test.bmp", [=](char a)->char{return 0xFF-a;});
+// 		psg.toBitmap("fr_"+psg.name()+".bmp", r, r, r);
+// 		psg.toBitmap("fr_"+psg.name()+".bmp", [=](char a)->char{return 0xFF-a;});
 		psg.toBitmap("fr_"+psg.name()+".bmp");
-// 		psg.toBitmapc("test.bmp");
+// 		psg.toBitmapc("fr_"+psg.name()+".bmp");
 	}
 	
 	return 0;
