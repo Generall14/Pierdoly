@@ -38,8 +38,8 @@ Point BarnsleyEquations::step(Point &other)
 	}
 	else if(v<_first+_second)
 	{
-		x = lx*-0.15 + ly*0.28;
-		y = lx*0.26 + ly*0.24 + length*0.044;
+		y = lx*-0.15 + ly*0.28;
+		x = lx*0.26 + ly*0.24 + length*0.044;
 	}
 	else if(v<_first+_second+_third)
 	{
@@ -57,17 +57,17 @@ Point BarnsleyEquations::step(Point &other)
 // 	if(v<_first)
 // 	{
 // 		x = lx*0.85 + ly*0.04;
-// 		y = lx*-0.04 + ly*0.85 + length*0.08;
+// 		y = lx*-0.04 + ly*0.85;
 // 	}
 // 	else if(v<_first+_second)
 // 	{
 // 		x = lx*-0.15 + ly*0.28;
-// 		y = lx*0.26 + ly*0.24 + length*0.044;
+// 		y = lx*0.26 + ly*0.24;
 // 	}
 // 	else if(v<_first+_second+_third)
 // 	{
 // 		x = lx*0.2 + ly*-0.26;
-// 		y = lx*0.23 + ly*0.22 + length*0.08;
+// 		y = lx*0.23 + ly*0.22;
 // 	}
 // 	else
 // 	{

@@ -16,8 +16,9 @@ char r(char a)
 
 int main()
 {
-	Generator gen(new BarnsleyEquations(0.85, 0.07, 0.07), Point(0, 100)); // x, y
-	PointSet psg = gen.generate(2, 30000, 3); // zasieg, powtorzenia
+// 	Generator gen(new BarnsleyEquations(0.85, 0.07, 0.07), Point(200, 200)); // x, y
+	Generator gen(new BarnsleyEquations(0.34, 0.33, 0.33), Point(400, 400)); // x, y
+	PointSet psg = gen.generate(50, 500000, 3); // zasieg, powtorzenia
 	
 	
 	psg.about();
