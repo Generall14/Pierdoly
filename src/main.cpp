@@ -26,7 +26,7 @@ int main()
 	
 // 	psg.toBitmap("test.bmp", r, r, r);
 // 	psg.toBitmap("test.bmp", [=](char a)->char{return 0xFF-a;});
-	psg.toBitmap("test.bmp");
+	psg.toBitmap("fr_"+psg.name()+".bmp");
 // 	psg.toBitmapc("test.bmp");
 	
 	return 0;

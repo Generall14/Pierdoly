@@ -3,7 +3,8 @@
 #include <ctime>
 #include <iostream>
 
-Equations::Equations()
+Equations::Equations(std::string name):
+	_name(name)
 {
 	srand (time(NULL));
 }
@@ -13,7 +14,7 @@ Equations::Equations()
  */
 Equations* Equations::Barnsley()
 {
-	Equations* eq = new Equations();;
+	Equations* eq = new Equations("Barnsley");;
 	eq->eqs.push_back(Equation{0.85, 0.04, 0.0, -0.04, 0.85, 1.6, 850});
 	eq->eqs.push_back(Equation{0.2, -0.26, 0.0, 0.23, 0.22, 1.6, 70});
 	eq->eqs.push_back(Equation{-0.15, 0.28, 0.0, 0.26, 0.24, 0.44, 70});
@@ -48,4 +49,9 @@ void Equations::calcNextPoint(float &x, float &y)
 	newY = x*eq.ya + y*eq.yb + eq.yc;
 	x = newX;
 	y = newY;
+}
+
+std::string Equations::name() const
+{
+	return _name;
 }

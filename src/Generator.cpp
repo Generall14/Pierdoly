@@ -34,7 +34,7 @@ Generator::~Generator()
 PointSet Generator::generate(unsigned int repeates, unsigned int intToFLoat)
 {
 	auto t1 = std::chrono::high_resolution_clock::now();
-	PointSet ps;
+	PointSet ps(eq->name());
 	
 	if((intToFLoat==0)||(repeates==0))
 		return ps;
@@ -73,6 +73,7 @@ void Generator::privateGenerate(PointSet *ps, unsigned int repeates, unsigned in
 	while(repeates-->0)
 	{
 		eq->calcNextPoint(x, y);
-		ps->addPoint(Point(x*intToFLoat, y*intToFLoat));
+		ps->addPoint(Point(y*intToFLoat, x*intToFLoat));
+// 		ps->addPoint(Point(x*intToFLoat, y*intToFLoat));
 	}
 }

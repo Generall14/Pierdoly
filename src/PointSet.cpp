@@ -5,9 +5,15 @@
 #include <cmath>
 #include <chrono>
 
-PointSet::PointSet()
+PointSet::PointSet(std::string name):
+	_name(name)
 {
 	_set.clear();
+}
+
+std::string PointSet::name() const
+{
+	return _name;
 }
 
 std::set<Point>::iterator PointSet::begin()

@@ -4,6 +4,7 @@
 #include <set>
 #include <string>
 #include <functional>
+#include <string>
 #include "Point.hpp"
 
 /**
@@ -22,12 +23,12 @@ class PointSet
 {
 public:
 	typedef unsigned int uint;
-	PointSet();
+	PointSet(std::string name="");
 	
 	std::set<Point>::iterator begin();
 	std::set<Point>::iterator end();
 	uint size() const;
-	
+	std::string name() const;
 	
 	void addPoint(const Point added);
 	void logarithm();
@@ -48,6 +49,7 @@ private:
 	PointSet normalized(uint maxValue=0xFF) const;
 	
 	std::set<Point> _set;
+	std::string _name;
 };
 
 #endif
