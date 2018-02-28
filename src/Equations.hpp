@@ -21,6 +21,10 @@ public:
 	static Equations* Spiral();
 	static Equations* Maple();
 	static Equations* Tree();
+	static Equations* Tree2();
+	static Equations* Ice();
+	static Equations* Feather();
+	static Equations* Koch();
 	
 private:
 	struct Equation

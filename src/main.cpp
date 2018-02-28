@@ -24,6 +24,10 @@ int main()
 // 	gens.push_back( Generator(Equations::Spiral(), x0, y0) );
 	gens.push_back( Generator(Equations::Maple(), x0, y0) );
 	gens.push_back( Generator(Equations::Tree(), x0, y0) );
+	gens.push_back( Generator(Equations::Tree2(), x0, y0) );
+	gens.push_back( Generator(Equations::Ice(), x0, y0) );
+	gens.push_back( Generator(Equations::Feather(), x0, y0) );
+	gens.push_back( Generator(Equations::Koch(), x0, y0) );
 	
 	for(auto g: gens)
 	{
