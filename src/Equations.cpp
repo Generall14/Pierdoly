@@ -9,6 +9,12 @@ Equations::Equations(std::string name):
 	srand (time(NULL));
 }
 
+Equations::Equations(const Equations &other)
+{
+	this->_name = other._name;
+	this->eqs = other.eqs;
+}
+
 /**
  * Tworzy obiekt z danymi odpowiadającymi równaniom generującymi Paproć Barnsley'a.
  */

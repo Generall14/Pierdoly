@@ -39,8 +39,10 @@ void PointSet::about() const
 	unsigned int v_min, v_max;
 	int x_min, x_max, y_min, y_max;
 	getRanges(x_min, x_max, y_min, y_max, v_min, v_max);
-	std::cout << "Elementów: " << size() << ", szerokosc: " << y_max-y_min << ", wysokosc: " << x_max-x_min << std::endl;
-	std::cout << "Zakresy: x[ " << x_min << " ; " << x_max << " ], y[ " << y_min << " ; " << y_max << " ], v[ " << v_min << " ; " << v_max << " ]" << std::endl;
+	std::cout << "########################## about " << _name << std::endl;
+	std::cout << "# Elementów: " << size() << ", szerokosc: " << y_max-y_min << ", wysokosc: " << x_max-x_min << std::endl;
+	std::cout << "# Zakresy: x[ " << x_min << " ; " << x_max << " ], y[ " << y_min << " ; " << y_max << " ], v[ " << v_min << " ; " << v_max << " ]" << std::endl;
+	std::cout << "##########################" << std::endl;
 }
 
 /**
@@ -252,7 +254,6 @@ void PointSet::toBitmap(std::string fileAdr, fun r, fun g, fun b) const
 		throw "ERROR!";
 	
 	PointSet norm = normalized(0xFF);
-	norm.about();
 	
 	auto t1 = std::chrono::high_resolution_clock::now();
 	

@@ -12,6 +12,7 @@
 class Equations
 {
 public:
+	Equations(const Equations &other);
 	void calcNextPoint(float &x, float &y);
 	std::string name() const;
 	
@@ -27,8 +28,8 @@ private:
 	Equations(std::string name);
 	
 	std::vector<Equation> eqs;
-	Equation choseEquation();
 	std::string _name;
+	Equation choseEquation();
 };
 
 #endif

@@ -18,11 +18,13 @@ class Generator
 {
 public:
 	Generator(Equations* equation, float x0 = 1.0, float y0 = 1.0);
+	Generator(const Generator &other);
 	~Generator();
 	
 	PointSet generate(unsigned int repeates, unsigned int intToFLoat=100);
 	
 private:
+	
 	Equations* eq = nullptr;
 	float _x0, _y0;
 	

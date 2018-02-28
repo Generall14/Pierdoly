@@ -18,6 +18,13 @@ Generator::Generator(Equations* equation, float x0, float y0):
 {
 }
 
+Generator::Generator(const Generator &other)
+{
+	this->_x0 = other._x0;
+	this->_y0 = other._y0;
+	this->eq = new Equations(*(other.eq));
+}
+
 Generator::~Generator()
 {
 	delete eq;
