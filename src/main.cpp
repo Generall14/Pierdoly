@@ -15,13 +15,13 @@ char r(char a)
 int main()
 {
 	Generator gen(Equations::Barnsley(), 0, 0); // x, y
-	PointSet psg = gen.generate(10000000, 100); // powtorzenia, rozdzielczość na jednostke
+	PointSet psg = gen.generate(10000000, 180); // powtorzenia, rozdzielczość na jednostke
 	
 	psg.about();
 	
-// 	psg.multiply(100000.0);psg.sqrt();psg.sqrt();
+	psg.multiply(100000.0);psg.sqrt();psg.sqrt();
 // 	psg.multiply(1000.0);psg.sqrt();
-	psg.logarithm();
+// 	psg.logarithm();
 	
 	
 // 	psg.toBitmap("test.bmp", r, r, r);

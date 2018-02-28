@@ -3,6 +3,11 @@
 
 #include <vector>
 
+/**
+ * @class Equations
+ * Klasa reprezentuje zbiór równań tworzących dla IFS. Udostępnia metodę calcNextPoint która na podstawie posiadanych równań oblicza kolejny punkt. Obiekty 
+ * tej klasy mogą być tworzone tylko przez przeznaczone do tego statyczne metody (uzupełniają one przy okazji prywatne dane specyfikujące dany zestaw równań).
+ */
 class Equations
 {
 public:

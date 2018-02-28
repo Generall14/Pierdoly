@@ -25,18 +25,21 @@ PointSet::uint PointSet::size() const
 	return _set.size();
 }
 
+/**
+ * Funkcja wysyłą na std::cout opis zbioru (zakresy, długości itp.).
+ */
 void PointSet::about() const
 {
-// 	std::cout << "result size: " << psg.size() << std::endl;
 	unsigned int v_min, v_max;
 	int x_min, x_max, y_min, y_max;
 	getRanges(x_min, x_max, y_min, y_max, v_min, v_max);
 	std::cout << "Elementów: " << size() << ", szerokosc: " << y_max-y_min << ", wysokosc: " << x_max-x_min << std::endl;
 	std::cout << "Zakresy: x[ " << x_min << " ; " << x_max << " ], y[ " << y_min << " ; " << y_max << " ], v[ " << v_min << " ; " << v_max << " ]" << std::endl;
-	
-// 	std::cout << x_min << " " << x_max << " " << y_min << " " << y_max << " " << v_min << " " << v_max << std::endl;
 }
 
+/**
+ * Funkcja oblicza zakresy współrzędnych i wartości.
+ */
 void PointSet::getRanges(int &x_min, int &x_max, int &y_min, int &y_max, PointSet::uint &v_min, PointSet::uint &v_max) const
 {
 	x_min = 0;
@@ -130,6 +133,9 @@ PointSet PointSet::normalized(PointSet::uint maxValue) const
 	return temp;
 }
 
+/**
+ * Funkcja logarytmuje (logarytm natralny) wszystkie elementy zbioru.
+ */
 void PointSet::logarithm()
 {
 	auto t1 = std::chrono::high_resolution_clock::now();
@@ -140,6 +146,9 @@ void PointSet::logarithm()
 	std::cout << "Logarithmed in " << ms.count() << " ms" << std::endl;
 }
 
+/**
+ * Funkcja mnoży wszystkie elementy zbioru przez wskazaną wartość.
+ */
 void PointSet::multiply(float mul)
 {
 	auto t1 = std::chrono::high_resolution_clock::now();
@@ -150,6 +159,9 @@ void PointSet::multiply(float mul)
 	std::cout << "Multiplied in " << ms.count() << " ms" << std::endl;
 }
 
+/**
+ * Funkcja pierwiastkuje (pierwiastek kwadratowy) wszystkie elementy zbioru.
+ */
 void PointSet::sqrt()
 {
 	auto t1 = std::chrono::high_resolution_clock::now();
@@ -170,6 +182,10 @@ void PointSet::toBitmap(std::string fileAdr) const
 	toBitmap(fileAdr, lambda, lambda, lambda);
 }
 
+/**
+ * Funkcja zapisuje znormalizowany zbiór punktów jako dziwnie pokolorowaną bitmape w pliku wskazanym w
+ * argumencie.
+ */
 void PointSet::toBitmapc(std::string fileAdr) const
 {
 	std::function<char(char)>r = [=](char arg)->char
@@ -201,6 +217,13 @@ void PointSet::toBitmapc(std::string fileAdr) const
 	toBitmap(fileAdr, g, b, r);
 }
 
+/**
+ * Funkcja zapisuje znormalizowany zbiór punktów jako bitmape w pliku wskazanym w
+ * argumencie. Funkcja all przetwarza dane z zakresu 0x00 - 0xFF na bajty 
+ * wszystkich kanałów.
+ * @param fileAdr - nazwa pliku docelowego
+ * @param all - funkcja [=](char arg)->char{} przekształcająca wartość na wszystkie kanały
+ */
 void PointSet::toBitmap(std::string fileAdr, fun all) const
 {
 	toBitmap(fileAdr, all, all, all);
@@ -210,6 +233,10 @@ void PointSet::toBitmap(std::string fileAdr, fun all) const
  * Funkcja zapisuje znormalizowany zbiór punktów jako bitmape w pliku wskazanym w
  * argumencie. Funkcje r, g, b przetwarzają dane z zakresu 0x00 - 0xFF na bajty 
  * poszczególnych kolorów.
+ * @param fileAdr - nazwa pliku docelowego
+ * @param r - funkcja [=](char arg)->char{} przekształcająca wartość na kanał czerwony 
+ * @param g - funkcja [=](char arg)->char{} przekształcająca wartość na kanał zielony
+ * @param b - funkcja [=](char arg)->char{} przekształcająca wartość na kanał niebieski 
  */
 void PointSet::toBitmap(std::string fileAdr, fun r, fun g, fun b) const
 {
@@ -275,9 +302,6 @@ void PointSet::toBitmap(std::string fileAdr, fun r, fun g, fun b) const
 		tt[0] = b(vec.at(i));
 		tt[1] = g(vec.at(i));
 		tt[2] = r(vec.at(i));
-// 		tt[0] = vec.at(i)&0xFF;
-// 		tt[1] = vec.at(i)&0xFF;
-// 		tt[2] = vec.at(i)&0xFF;
 		file.write(tt, 3);
 	}
 	

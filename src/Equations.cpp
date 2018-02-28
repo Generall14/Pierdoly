@@ -8,6 +8,9 @@ Equations::Equations()
 	srand (time(NULL));
 }
 
+/**
+ * Tworzy obiekt z danymi odpowiadającymi równaniom generującymi Paproć Barnsley'a.
+ */
 Equations* Equations::Barnsley()
 {
 	Equations* eq = new Equations();;
@@ -34,6 +37,9 @@ Equations::Equation Equations::choseEquation()
 	return eqs[eqs.size()-1];
 }
 
+/**
+ * Oblicza kolejne punkty x i y na podstawie posiadanych równań.
+ */
 void Equations::calcNextPoint(float &x, float &y)
 {
 	Equation eq = choseEquation();

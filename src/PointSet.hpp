@@ -14,7 +14,9 @@
  * punktu 0,0 i przeskalowanymi od 0 do wskazanej wartości. Metoda merge dodaje wszystkie pozycje 
  * z wskazanego innego obiektu.
  * 
- * Metoda toBitmap(...) przekształca zbiór w bitmape i zapisuje ją pod wskazanym adresem.
+ * Metody toBitmap(...) przekształca zbiór w bitmape i zapisuje ją pod wskazanym adresem.
+ * 
+ * Metody logarithm(), multiply(), sqrt() wykonują zadane operacje matematyczne na elementach zbioru.
  */
 class PointSet
 {
@@ -25,7 +27,7 @@ public:
 	std::set<Point>::iterator begin();
 	std::set<Point>::iterator end();
 	uint size() const;
-	void getRanges(int &x_min, int &x_max, int &y_min, int &y_max, uint &v_min, uint &v_max) const;
+	
 	
 	void addPoint(const Point added);
 	void logarithm();
@@ -42,6 +44,7 @@ public:
 	void merge(PointSet &other);
 	
 private:
+	void getRanges(int &x_min, int &x_max, int &y_min, int &y_max, uint &v_min, uint &v_max) const;
 	PointSet normalized(uint maxValue=0xFF) const;
 	
 	std::set<Point> _set;

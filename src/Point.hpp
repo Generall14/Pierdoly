@@ -4,8 +4,8 @@
 /**
  * @class Point
  * Klasa reprezentuje punkt w przestrzeni dwuwymiarowej, punkty X i Y są stałe po stworzeniu obiektu.
- * Obiekty są orównywane w pierwszej kolejności pod względem współrzędnej y, następnie względem 
- * współrzędnej x, wartość nie jest brana pod uwagę.
+ * Obiekty są orównywane w pierwszej kolejności pod względem współrzędnej x, następnie względem 
+ * współrzędnej y, wartość nie jest brana pod uwagę.
  */
 class Point
 {
