@@ -17,6 +17,10 @@ public:
 	std::string name() const;
 	
 	static Equations* Barnsley();
+	static Equations* Sierpinski();
+	static Equations* Spiral();
+	static Equations* Maple();
+	static Equations* Tree();
 	
 private:
 	struct Equation

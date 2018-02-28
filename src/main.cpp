@@ -15,11 +15,15 @@ char r(char a)
 int main()
 {
 	float x0=1.0, y0=1.0;
-	unsigned int res = 180;
+	unsigned int res = 100;
 	unsigned int steps = 1000000;
 	std::vector<Generator> gens;
 	
 	gens.push_back( Generator(Equations::Barnsley(), x0, y0) );
+	gens.push_back( Generator(Equations::Sierpinski(), x0, y0) );
+// 	gens.push_back( Generator(Equations::Spiral(), x0, y0) );
+	gens.push_back( Generator(Equations::Maple(), x0, y0) );
+	gens.push_back( Generator(Equations::Tree(), x0, y0) );
 	
 	for(auto g: gens)
 	{
