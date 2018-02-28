@@ -14,6 +14,8 @@ char r(char a)
 
 int main()
 {
+	Equations eq = Equations::Barnsley();
+	
 // 	Generator gen(new BarnsleyEquations(0.34, 0.33, 0.33), Point(400, 400)); // x, y
 // 	PointSet psg = gen.generate(50, 500000, 3); // zasieg, powtorzenia
 	

@@ -1,16 +1,26 @@
 #ifndef EQUATIONS_HPP
 #define EQUATIONS_HPP
 
-#include "Point.hpp"
+#include <vector>
 
 class Equations
 {
 public:
-	Equations();
+	void calcNextPoint(float &x, float &y);
 	
-	virtual Point step(Point &other) = 0;
+	static Equations Barnsley();
 	
 private:
+	struct Equation
+	{
+		float xa, xb, xc, ya, yb, yc;
+		unsigned int chance; // prawdopodobieństwo wylosowania funkcji (w promilach, suma we wszystkich równaniach powinna się sumować do 1000)
+	};
+	
+	Equations();
+	
+	std::vector<Equation> eqs;
+	Equation choseEquation();
 };
 
 #endif
