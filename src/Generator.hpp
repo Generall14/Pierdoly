@@ -16,6 +16,9 @@ public:
 private:
 	Equations* eq = nullptr;
 	float _x0, _y0;
+	
+	void privateGenerate(PointSet *ps, unsigned int repeates, unsigned int intToFLoat);
+	
 // 	Point first;
 	
 // 	void drawLine(PointSet *ps, Point start, Point line, unsigned int lines_resolution);

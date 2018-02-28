@@ -8,7 +8,7 @@ class Equations
 public:
 	void calcNextPoint(float &x, float &y);
 	
-	static Equations Barnsley();
+	static Equations* Barnsley();
 	
 private:
 	struct Equation
