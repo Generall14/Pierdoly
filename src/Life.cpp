@@ -1,6 +1,7 @@
 #include "Life.hpp"
 #include <iostream>
 #include <chrono>
+#include <cstdlib>
 
 Life::Life(unsigned int rows, unsigned int cols)
 {
@@ -11,6 +12,13 @@ Life::Life(unsigned int rows, unsigned int cols)
 
     buff[0].ptr = new char[(rows*cols)];
     buff[1].ptr = new char[(rows*cols)];
+	
+	int cnt;
+	for(uint row=0;row<buff[0].rows;row++)
+	{
+		for(uint column=0;column<buff[0].cols;column++)
+			buff[0].ptr[row*buff[0].cols+column]=rand()&0x01;
+	}
 }
 
 Life::~Life()
@@ -21,7 +29,7 @@ Life::~Life()
 
 void Life::sim(unsigned int steps)
 {
-    std::cout << "Sim " << steps << " steps by " << _name << "..." << std::endl;
+//     std::cout << "Sim " << steps << " steps by " << _name << "..." << std::endl;
     auto t1 = std::chrono::high_resolution_clock::now();
 
     while(steps--)
@@ -35,8 +43,8 @@ void Life::sim(unsigned int steps)
     }
 
     auto t2 = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double, std::milli> ms = t2 - t1;
-    std::cout << "...done in " << ms.count() << " ms" << std::endl;
+//     std::chrono::duration<double, std::milli> ms = t2 - t1;
+//     std::cout << "...done in " << ms.count() << " ms" << std::endl;
 }
 
 const Life::dat* Life::get()
