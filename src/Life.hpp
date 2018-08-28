@@ -24,7 +24,7 @@ protected:
     dat buff[2];
     unsigned int _currentBuff = 0;
 
-    virtual void sim(dat& current, const dat& old, unsigned int column, unsigned int row) = 0;
+    virtual void siml(dat& current, const dat& old, unsigned int column, unsigned int row) = 0;
 
 private:
     Life(const Life&){}
