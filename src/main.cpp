@@ -34,7 +34,7 @@ int main()
 		
 		curs_set(0);
 		refresh();
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 // 		getchar();
 		
 		life.sim(1);

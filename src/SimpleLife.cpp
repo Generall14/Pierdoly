@@ -49,5 +49,8 @@ void SimpleLife::siml(dat& current, const dat& old, unsigned int column, unsigne
         if(count==3)
             current.ptr[row*old.cols+column] = 0x01;
     }
+    
+    if(!(rand()%100000))
+		current.ptr[row*old.cols+column] = 0x01;
 //     std::cout << row << " " << column << std::endl;
 }
