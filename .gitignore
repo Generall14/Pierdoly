@@ -1,4 +1,8 @@
 */build/*
 *.bmp
-fra
+Fraktale/fra
 */stats/*
+*.user
+*.user.*
+*.o
+Life/life
